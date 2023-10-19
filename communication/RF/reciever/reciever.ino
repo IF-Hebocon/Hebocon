@@ -6,7 +6,7 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-const byte thisSlaveAddress[22] = "ah8Bgq2UQja5uv3Ex6hJ6q";
+const byte address[22] = "ah8Bgq2UQja5uv3Ex6hJ6q";
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -21,7 +21,7 @@ bool newData = false;
 void setup() {
   radio.begin();
   radio.setDataRate(RF24_250KBPS);
-  radio.openReadingPipe(1, thisSlaveAddress);
+  radio.openReadingPipe(1, address);
   radio.startListening();
 
   pinMode(4, OUTPUT);
