@@ -9,7 +9,7 @@ const byte thisSlaveAddress[22] = "ah8Bgq2UQja5uv3Ex6hJ6q";
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-enum Direction { FORWARD , LEFT, BACKWARD, RIGHT };
+enum Direction { FORWARD, LEFT, BACKWARD, RIGHT };
 
 unsigned short direction;
 bool newData = false;
