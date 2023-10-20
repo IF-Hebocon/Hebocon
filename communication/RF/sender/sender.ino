@@ -13,7 +13,8 @@ RF24 radio(CE_PIN, CSN_PIN);
 enum Direction { FORWARD = 1,
                  LEFT = 2,
                  BACKWARD = 3,
-                 RIGHT = 4 };
+                 RIGHT = 4,
+                 STOP = 5 };
 
 unsigned short direction;
 
@@ -28,7 +29,7 @@ void setup() {
 }
 
 void loop() {
-  while (!Serial.available());
+  if (!Serial.available()) return;
   if (read()) {
     send();
   }
