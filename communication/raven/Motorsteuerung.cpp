@@ -32,7 +32,7 @@ Motorsteuerung::Motorsteuerung(unsigned short pinLeft1, unsigned short pinLeft2,
     this->right = new Motor(pinRight1, pinRight2);
 }
 
-Motorsteuerung::drive(Direction direction) {
+void Motorsteuerung::drive(Direction direction) {
     switch (direction) {
     case FORWARD:
         this->left->forward();
