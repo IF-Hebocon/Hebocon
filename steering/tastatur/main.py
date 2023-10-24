@@ -4,9 +4,7 @@ from time import sleep
 
 siri = Serial(port='COM4', baudrate=9600, timeout=.1)
 
-
-# TODO: On release wieder aus machen
-keys = { 'w': 1, 
+keys = { 'w': 1,
          'a': 2, 
          's': 3, 
          'd': 4 }
