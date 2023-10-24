@@ -2,7 +2,6 @@
 
 
 Raven::Raven(Motorsteuerung* steuerung) {
-    Serial.begin(9600);
     this->steuerung = steuerung;
 }
 
@@ -12,9 +11,13 @@ void Raven::loop() {
     this->steuerung->drive(direction);
 }
 
+Direction Raven::getDirection() {
+    return static_cast<Direction>(this->getRaw());
+}
+
 
 WiredRaven::WiredRaven(Motorsteuerung* steuerung) : Raven(steuerung) {
-
+    Serial.begin(9600);
 }
 
 unsigned short WiredRaven::getRaw() {
@@ -22,10 +25,6 @@ unsigned short WiredRaven::getRaw() {
     unsigned short data;
     Serial.readBytes((char*)&data, sizeof(data));
     return data;
-}
-
-Direction WiredRaven::getDirection() {
-    return static_cast<Direction>(this->getRaw());
 }
 
 
@@ -60,8 +59,4 @@ unsigned short WirelessRaven::getRaw() {
     unsigned short direction;
     this->radio->read(&direction, sizeof(direction));
     return direction;
-}
-
-Direction WirelessRaven::getDirection() {
-    return static_cast<Direction>(this->getRaw());
 }
