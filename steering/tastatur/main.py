@@ -13,6 +13,7 @@ keys = { 'w': 1,
 key_pressed = None
 
 def on_press(key):
+    global key_pressed
     if key is Key.esc:
         siri.close()
         exit()
@@ -22,6 +23,7 @@ def on_press(key):
             siri.write(sixpack('H', keys[key.char]))
 
 def on_release(key):
+    global key_pressed
     if hasattr(key, 'char'):
         if key.char in keys.keys() and key.char == key_pressed:
             siri.write(sixpack('H', 5))
