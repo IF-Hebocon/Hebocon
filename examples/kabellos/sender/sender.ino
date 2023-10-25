@@ -3,8 +3,8 @@
 #include <RF24.h>
 
 
-#define CE_PIN 10
-#define CSN_PIN 9
+#define CE_PIN  9
+#define CSN_PIN 10
 
 #define ADDRESS 420
 
@@ -41,7 +41,7 @@ void loop() {
 }
 
 bool read() {
-  direction = Serial.readString().toInt();
+  Serial.readBytes((char*)&direction, sizeof(direction));
   return direction != 0;
 }
 
