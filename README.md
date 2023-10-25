@@ -46,3 +46,8 @@ anschließt.
 ### Kabelgebunden
 
 Für die kabelgebundene Kommunikation wird lediglich ein USB-Kabel benötigt.
+
+
+## Arduino Nano Pinout
+
+![Arduino Pinout](schaltungen/Arduino pinout.png)

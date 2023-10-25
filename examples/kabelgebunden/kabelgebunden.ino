@@ -4,7 +4,7 @@
 #define MOTOR_A1 2
 #define MOTOR_A2 3
 #define MOTOR_B1 4
-#define MOTOR_B1 5
+#define MOTOR_B2 5
 
 
 Raven* raven;
