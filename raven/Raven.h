@@ -11,7 +11,7 @@ class Raven {
         Raven(Motorsteuerung* steuerung);
         void loop();
         Direction getDirection();
-        virtual unsigned short getRaw();
+        virtual unsigned short getRaw() = 0;
 };
 
 class WiredRaven : public Raven {
