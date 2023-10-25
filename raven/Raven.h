@@ -11,14 +11,14 @@ class Raven {
         Raven(Motorsteuerung* steuerung);
         void loop();
         Direction getDirection();
-        virtual unsigned short getRaw() = 0;
+        virtual unsigned short getRaw();
 };
 
 class WiredRaven : public Raven {
     public:
         WiredRaven(Motorsteuerung* steuerung);
-        Direction getDirection() override;
-        unsigned short getRaw() override;
+        Direction getDirection();
+        unsigned short getRaw();
 };
 
 class WirelessRaven : public Raven {
