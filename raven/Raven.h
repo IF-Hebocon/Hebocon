@@ -10,7 +10,7 @@ class Raven {
     public:
         Raven(Motorsteuerung* steuerung);
         void loop();
-        virtual Direction getDirection() = 0;
+        Direction getDirection();
         virtual unsigned short getRaw() = 0;
 };
 
