@@ -27,8 +27,6 @@ unsigned short WiredRaven::getRaw() {
     return data;
 }
 
-
-
 WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessNumber) : WirelessRaven(steuerung, wirelessNumber, 9, 10) {
 
 }
@@ -39,19 +37,13 @@ WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessN
 
     this->radio = new RF24(cePin, csnPin);
 
-    Serial.print("Chip connected: ");
-    Serial.println(this->radio->isChipConnected());
-    Serial.print("Chip begin: ");
-    Serial.println(this->radio->begin());
-
+    this->radio->begin();
     this->radio->setAutoAck(false);
     this->radio->setPALevel(RF24_PA_MAX);
     this->radio->setDataRate(RF24_250KBPS);
     this->radio->setPayloadSize(sizeof(unsigned long));
     this->radio->openReadingPipe(1, address);
     this->radio->startListening();
-
-    Serial.println("Ready");
 }
 
 unsigned short WirelessRaven::getRaw() {
