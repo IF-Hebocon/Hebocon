@@ -6,7 +6,7 @@
 #define CE_PIN 10
 #define CSN_PIN 9
 
-const byte slaveAddress[22] = "ah8Bgq2UQja5uv3Ex6hJ6q";
+#define ADDRESS 420
 
 RF24 radio(CE_PIN, CSN_PIN);
 
@@ -19,13 +19,18 @@ enum Direction { FORWARD = 1,
 unsigned short direction;
 
 void setup() {
+  uint8_t address[6];
+  sprintf(address, "WAN%02u", ADDRESS);
+
   Serial.begin(9600);
   Serial.setTimeout(.1);
 
   radio.begin();
-  radio.setDataRate(RF24_250KBPS);
   radio.setRetries(3, 5);
-  radio.openWritingPipe(slaveAddress);
+  radio.setPALevel(RF24_PA_MAX);
+  radio.setDataRate(RF24_250KBPS);
+  radio.setPayloadSize(sizeof(unsigned long));
+  radio.openWritingPipe(address);
 }
 
 void loop() {
