@@ -1,2 +1,6 @@
 .idea/
 .DS_Store
+
+**/Lib
+**/Scripts
+**/pyvenv.cfg
