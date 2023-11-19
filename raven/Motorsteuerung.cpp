@@ -1,7 +1,7 @@
 #include "Motorsteuerung.h"
 #include <Arduino.h>
 
-Motor::Motor(unsigned short pinA, unsigned short pinB) {
+Motor::Motor(byte pinA, byte pinB) {
     this->pinA = pinA;
     this->pinB = pinB;
     pinMode(pinA, OUTPUT);
@@ -26,8 +26,8 @@ void Motor::stop() {
 }
 
 
-Motorsteuerung::Motorsteuerung(unsigned short pinLeft1, unsigned short pinLeft2,
-                               unsigned short pinRight1, unsigned short pinRight2) {
+Motorsteuerung::Motorsteuerung(byte pinLeft1, byte pinLeft2,
+                               byte pinRight1, byte pinRight2) {
     this->left = new Motor(pinLeft1, pinLeft2);
     this->right = new Motor(pinRight1, pinRight2);
 }

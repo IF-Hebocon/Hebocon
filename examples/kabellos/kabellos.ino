@@ -8,7 +8,7 @@
 #define CE_PIN 9
 #define CSN_PIN 10
 
-#define ADDRESS 420
+#define ADDRESS 42
 
 Raven* raven;
 

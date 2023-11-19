@@ -7,12 +7,10 @@ Raven::Raven(Motorsteuerung* steuerung) {
 
 void Raven::loop() {
     if (!this->steuerung) return;
-    const Direction direction = this->getDirection();
+    const byte data = this->getRaw();
+    if (!data) return;
+    const Direction direction = static_cast<Direction>(data);
     this->steuerung->drive(direction);
-}
-
-Direction Raven::getDirection() {
-    return static_cast<Direction>(this->getRaw());
 }
 
 
@@ -20,35 +18,35 @@ WiredRaven::WiredRaven(Motorsteuerung* steuerung) : Raven(steuerung) {
     Serial.begin(9600);
 }
 
-unsigned short WiredRaven::getRaw() {
-    while (Serial.available() <= 1) { delay(10); Serial.println(Serial.available()); };
-    unsigned short data;
-    Serial.readBytes((char*)&data, sizeof(data));
+byte WiredRaven::getRaw() {
+    if (!Serial.available()) return 0;
+    byte data;
+    Serial.readBytes(&data, sizeof(data));
     return data;
 }
 
-WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessNumber) : WirelessRaven(steuerung, wirelessNumber, 9, 10) {
+WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, byte wirelessNumber) : WirelessRaven(steuerung, wirelessNumber, 9, 10) {
 
 }
 
-WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessNumber, unsigned short cePin, unsigned short csnPin) : Raven(steuerung) {
+WirelessRaven::WirelessRaven(Motorsteuerung* steuerung, byte wirelessNumber, byte cePin, byte csnPin) : Raven(steuerung) {
     uint8_t address[6];
     sprintf(address, "WAN%02u", wirelessNumber);
 
     this->radio = new RF24(cePin, csnPin);
 
     this->radio->begin();
-    this->radio->setAutoAck(false);
+    this->radio->setAutoAck(true);
     this->radio->setPALevel(RF24_PA_MAX);
     this->radio->setDataRate(RF24_250KBPS);
-    this->radio->setPayloadSize(sizeof(unsigned long));
+    this->radio->setPayloadSize(sizeof(byte));
     this->radio->openReadingPipe(1, address);
     this->radio->startListening();
 }
 
-unsigned short WirelessRaven::getRaw() {
-    while (!this->radio->available()) delay(10);
-    unsigned short direction;
-    this->radio->read(&direction, sizeof(direction));
-    return direction;
+byte WirelessRaven::getRaw() {
+    if (this->radio->available() == 0) return 0;
+    byte data;
+    this->radio->read(&data, sizeof(data));
+    return data;
 }

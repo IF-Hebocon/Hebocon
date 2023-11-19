@@ -10,21 +10,20 @@ class Raven {
     public:
         Raven(Motorsteuerung* steuerung);
         void loop();
-        Direction getDirection();
-        virtual unsigned short getRaw() = 0;
+        virtual byte getRaw() = 0;
 };
 
 class WiredRaven : public Raven {
     public:
         WiredRaven(Motorsteuerung* steuerung);
-        unsigned short getRaw() override;
+        byte getRaw() override;
 };
 
 class WirelessRaven : public Raven {
     private:
         RF24* radio;
     public:
-        WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessNumber);
-        WirelessRaven(Motorsteuerung* steuerung, unsigned short wirelessNumber, unsigned short cePin, unsigned short csPin);
-        unsigned short getRaw() override;
+        WirelessRaven(Motorsteuerung* steuerung, byte wirelessNumber);
+        WirelessRaven(Motorsteuerung* steuerung, byte wirelessNumber, byte cePin, byte csPin);
+        byte getRaw() override;
 };
